@@ -66,7 +66,7 @@ describe("The locking module", function() {
               .exec(function(err, replies) {
                 if (err) { done(err); }
                 (replies[0] === null).should.be.true;
-                replies[1].should.be.eql(-1);
+                replies[1].should.be.lessThan(0);
                 replies[2].should.be.eql([firstLockId]);
                 callback(err);
               });
