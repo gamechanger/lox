@@ -1,0 +1,491 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>lox API documentation</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="generator" content="https://github.com/kevinrenskers/raml2html">
+
+    <script type="text/javascript">
+        var protocol = ((document.location.protocol === 'https:') ? 'https:': 'http:');
+        document.write('<link rel="stylesheet" href="' + protocol + '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">');
+        document.write('<link rel="stylesheet" href="' + protocol + '//yandex.st/highlightjs/8.0/styles/github.min.css">');
+        document.write('<script type="text/javascript" src="' + protocol + '//code.jquery.com/jquery-1.11.0.min.js"><\/sc' + 'ript>');
+        document.write('<script type="text/javascript" src="' + protocol + '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"><\/sc' + 'ript>');
+    </script>
+
+    <style>
+        .parent {
+            color: #999;
+        }
+        .list-group-item > .badge {
+            float: none;
+            margin-right: 6px;
+        }
+        .panel-title > .block > .methods {
+            float: right;
+        }
+        .badge {
+            border-radius: 0;
+            text-transform: uppercase;
+            width: 70px;
+            font-weight: normal;
+            color: #f3f3f6;
+            line-height: normal;
+        }
+        .block .badge {
+            visibility: hidden;
+        }
+        .block.collapsed .badge {
+            visibility: visible;
+        }
+        .badge_get {
+            background-color: #63a8e2;
+        }
+        .badge_post {
+            background-color: #6cbd7d;
+        }
+        .badge_put {
+            background-color: #22bac4;
+        }
+        .badge_delete {
+            background-color: #d26460;
+        }
+        .block {
+            display: block;
+        }
+        .list-group, .panel-group {
+            margin-bottom: 0;
+        }
+        .panel-group .panel+.panel-white {
+            margin-top: 0;
+        }
+        .panel-group .panel-white {
+            border-bottom: 1px solid #F5F5F5;
+            border-radius: 0;
+        }
+        .panel-white:last-child {
+            border-bottom-color: white;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        .panel-white .panel-heading {
+            background: white;
+        }
+        .tab-pane ul {
+            padding-left: 2em;
+        }
+        .tab-pane h2 {
+            font-size: 1.2em;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-pane h3 {
+            font-size: 1.1em;
+        }
+        .tab-content {
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+        #sidebar {
+            margin-top: 30px;
+        }
+        .resource-description {
+            border-bottom: 1px solid #ddd;
+            background: #fcfcfc;
+            padding: 15px 15px 0 15px;
+            margin: -15px -15px 10px -15px;
+        }
+        .list-group .badge {
+            float: left;
+        }
+        .method_description {
+            margin-left: 85px;
+        }
+        .method_description p:last-child {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target="#sidebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9" role="main">
+                <div class="page-header">
+                    <h1>lox API documentation</h1>
+                    <p>/</p>
+
+                    
+                </div>
+
+                
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 id="_lock" class="panel-title">/lock</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            
+
+                            <div class="panel-group">
+                                <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__lock">
+                <span class="methods">
+                    
+                        <span class="badge badge_post">post</span>
+                    
+                </span>
+                <span class="parent"></span>/lock
+            </a>
+        </h4>
+    </div>
+    <div id="panel__lock" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_lock_post" class="list-group-item">
+                        <span class="badge badge_post">post</span>
+                        <div class="method_description">
+                            <p>Attempt to acquire a shared lock.</p>
+<p>Multi-paragraph stuff.</p>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_lock_post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_post">post</span>
+                            <span class="parent"></span>/lock
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Attempt to acquire a shared lock.</p>
+<p>Multi-paragraph stuff.</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#_lock_post_request" data-toggle="tab">Request</a>
+                            </li>
+                            
+                                <li>
+                                    <a href="#_lock_post_response" data-toggle="tab">Response</a>
+                                </li>
+                            
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_lock_post_request">
+                                
+
+                                
+
+                                
+                                    <h3>Query Parameters</h3>
+                                    <ul>
+                                        
+                                            <li>
+                                                <strong>key</strong>
+                                                <em>
+                                                    
+                                                        required
+                                                    
+                                                    
+                                                        (string)
+                                                    
+                                                </em>
+
+                                                <p>An identifier for the shared lock you want to acquire</p>
+
+                                                
+                                                
+                                                    <p>
+                                                        <small>
+                                                            <strong>Example:</strong>
+                                                            <code>lox.shared.lock.123</code>
+                                                        </small>
+                                                    </p>
+                                                
+                                            </li>
+                                        
+                                            <li>
+                                                <strong>maximumHeldKeys</strong>
+                                                <em>
+                                                    
+                                                        required
+                                                    
+                                                    
+                                                        (integer)
+                                                    
+                                                </em>
+
+                                                <p>The maximum allowable number of currently held keys. If this many keys are already held, acquisition will fail</p>
+
+                                                
+                                                
+                                                    <p>
+                                                        <small>
+                                                            <strong>Example:</strong>
+                                                            <code>5</code>
+                                                        </small>
+                                                    </p>
+                                                
+                                            </li>
+                                        
+                                            <li>
+                                                <strong>ttlSeconds</strong>
+                                                <em>
+                                                    
+                                                        required
+                                                    
+                                                    
+                                                        (number)
+                                                    
+                                                </em>
+
+                                                <p>The number of seconds for which to hold the lock</p>
+
+                                                
+                                                
+                                                    <p>
+                                                        <small>
+                                                            <strong>Example:</strong>
+                                                            <code>60</code>
+                                                        </small>
+                                                    </p>
+                                                
+                                            </li>
+                                        
+                                    </ul>
+                                
+
+                                
+                            </div>
+
+                            
+                                <div class="tab-pane" id="_lock_post_response">
+                                    
+                                        <h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2>
+                                        <p>Successfully acquired a shared lock</p>
+
+
+                                        
+
+                                        
+                                            <h3>Body</h3>
+                                            
+                                                <p><strong>Type: application/json</strong></p>
+                                                
+                                                
+                                                    <strong>Example:</strong>
+                                                    <pre>{"<span class="hljs-attribute">lockId</span>": <span class="hljs-value"><span class="hljs-string">"3885b1e0-022c-11e4-b7c7-6b932dd1bfa1"</span></span>}
+</pre>
+                                                
+                                            
+                                        
+                                    
+                                        <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
+                                        <p>Could not acquire a shared lock</p>
+
+
+                                        
+
+                                        
+                                            <h3>Body</h3>
+                                            
+                                                <p><strong>Type: application/json</strong></p>
+                                                
+                                                
+                                                    <strong>Example:</strong>
+                                                    <pre><span class="hljs-rules">{<span class="hljs-rule">}</span></span></pre>
+                                                
+                                            
+                                        
+                                    
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+    <div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="block collapsed" data-toggle="collapse" href="#panel__lock__lockId_">
+                <span class="methods">
+                    
+                        <span class="badge badge_delete">delete</span>
+                    
+                </span>
+                <span class="parent">/lock</span>/{lockId}
+            </a>
+        </h4>
+    </div>
+    <div id="panel__lock__lockId_" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="list-group">
+                
+                    <a href="#" data-toggle="modal" data-target="#_lock__lockId__delete" class="list-group-item">
+                        <span class="badge badge_delete">delete</span>
+                        <div class="method_description">
+                            <p>Release a held lock.</p>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="modal fade" id="_lock__lockId__delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_delete">delete</span>
+                            <span class="parent">/lock</span>/{lockId}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><p>Release a held lock.</p>
+</div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#_lock__lockId__delete_request" data-toggle="tab">Request</a>
+                            </li>
+                            
+                                <li>
+                                    <a href="#_lock__lockId__delete_response" data-toggle="tab">Response</a>
+                                </li>
+                            
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="_lock__lockId__delete_request">
+                                
+                                    <h3>URI Parameters</h3>
+                                    <ul>
+                                        
+                                            <li><strong>lockId</strong>: string</li>
+                                        
+                                    </ul>
+                                
+
+                                
+
+                                
+                                    <h3>Query Parameters</h3>
+                                    <ul>
+                                        
+                                            <li>
+                                                <strong>lockId</strong>
+                                                <em>
+                                                    
+                                                        required
+                                                    
+                                                    
+                                                        (string)
+                                                    
+                                                </em>
+
+                                                <p>The lock ID provided by a previously successful lock acquisition</p>
+
+                                                
+                                                
+                                                    <p>
+                                                        <small>
+                                                            <strong>Example:</strong>
+                                                            <code>3885b1e0-022c-11e4-b7c7-6b932dd1bfa1</code>
+                                                        </small>
+                                                    </p>
+                                                
+                                            </li>
+                                        
+                                    </ul>
+                                
+
+                                
+                            </div>
+
+                            
+                                <div class="tab-pane" id="_lock__lockId__delete_response">
+                                    
+                                        <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
+                                        <p>If a lock was held, it has been released</p>
+
+
+                                        
+
+                                        
+                                            <h3>Body</h3>
+                                            
+                                                <p><strong>Type: application/json</strong></p>
+                                                
+                                                
+                                                    <strong>Example:</strong>
+                                                    <pre><span class="hljs-rules">{<span class="hljs-rule">}</span></span></pre>
+                                                
+                                            
+                                        
+                                    
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+
+            <div class="col-md-3">
+                <div id="sidebar" class="hidden-print affix" role="complementary">
+                    <ul class="nav nav-pills nav-stacked">
+                        
+                            <li><a href="#_lock">/lock</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
