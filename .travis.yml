@@ -13,3 +13,4 @@ notifications:
       secure: FdOk85hG2xYGZ3vWCbQTnq18BzYQlZQxsm0txs/kP1xsCjg8OmeG9GM/sWA7cTzMYaQLWKYqszLKJ7PBBSeTN0CN/iZovsU+LTnWZoEaZVClofsrJR66kiMREKor89YreVKCDb5tqNvKIbV4SD1yCY1DTvB/a1cnhcq9+BeIGBQ=
     template:
       - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}'
+  email: false
