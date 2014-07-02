@@ -5,8 +5,22 @@ var uuid = require('node-uuid');
 
 var app = require('../lox');
 var config = require('../lib/config');
+var client = require('../lib/redis-client');
 
 describe("The HTTP endpoint", function() {
+  var testKey = null;
+
+  beforeEach(function() {
+    testKey = uuid.v1();
+  });
+
+  afterEach(function(done) {
+    client.del(testKey, function(err, value) {
+      if (err) { done(err); }
+      testKey = null;
+      done(err);
+    });
+  });
 
   describe("POST /lock", function() {
     var url = 'http://localhost:' + config.port + '/lock';
@@ -19,7 +33,7 @@ describe("The HTTP endpoint", function() {
     });
 
     it("returns 201 and lockId on acquiring a fresh lock", function(done) {
-      var form = {key: uuid.v1(), concurrentKeys: 1, ttlSeconds: 60};
+      var form = {key: testKey, concurrentKeys: 1, ttlSeconds: 60};
       request.post({url: url, json: form}, function(err, res, body) {
         res.statusCode.should.be.eql(201);
         body.lockId.should.be.ok;
@@ -28,7 +42,7 @@ describe("The HTTP endpoint", function() {
     });
 
     it("returns 204 when failing to acquire a lock", function(done) {
-      var form = {key: uuid.v1(), concurrentKeys: 1, ttlSeconds: 60};
+      var form = {key: testKey, concurrentKeys: 1, ttlSeconds: 60};
       request.post({url: url, json: form}, function(err, res, body) {
         request.post({url: url, json: form}, function(err, res, body) {
           res.statusCode.should.be.eql(204);
@@ -53,7 +67,7 @@ describe("The HTTP endpoint", function() {
     });
 
     it("returns 204 on an existing lock", function(done) {
-      var form = {key: uuid.v1(), concurrentKeys: 1, ttlSeconds: 60};
+      var form = {key: testKey, concurrentKeys: 1, ttlSeconds: 60};
       request.post({url: url, json: form}, function(err, res, body) {
         if (err) { done(err); }
         var lockId = body.lockId;

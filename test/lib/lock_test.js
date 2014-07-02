@@ -6,11 +6,23 @@ var lock = require('../../lib/lock');
 var client = require('../../lib/redis-client');
 
 describe("The locking module", function() {
+  var testKey = null;
+
+  beforeEach(function() {
+    testKey = uuid.v1();
+  });
+
+  afterEach(function(done) {
+    client.del(testKey, function(err, value) {
+      if (err) { done(err); }
+      testKey = null;
+      done(err);
+    });
+  });
 
   describe("acquires a lock", function() {
 
     it("on a non-existent key", function(done) {
-      var testKey = uuid.v1();
       lock.acquireLock(testKey, 1, 60, function(err, lockId) {
         client.multi()
           .get(lockId)
@@ -27,7 +39,6 @@ describe("The locking module", function() {
     });
 
     it("on an existing key with sufficient availabiilty", function(done) {
-      var testKey = uuid.v1();
       lock.acquireLock(testKey, 5, 60, function(err, firstLockId) {
         if (err) { done(err); }
         lock.acquireLock(testKey, 5, 60, function(err, secondLockId) {
@@ -51,7 +62,6 @@ describe("The locking module", function() {
     });
 
     it("on an existing key with insufficient availability and fails", function(done) {
-      var testKey = uuid.v1();
       async.waterfall([
         function(callback) { lock.acquireLock(testKey, 1, 60, callback); },
         function(firstLockId, callback) {
@@ -80,7 +90,6 @@ describe("The locking module", function() {
   describe("releases a lock", function() {
 
     it("on a non-existent or expired key", function(done) {
-      var testKey = uuid.v1();
       lock.releaseLock(testKey, function(err) {
         if (err) { done(err); }
         client.get(testKey, function(err, value) {
@@ -91,7 +100,6 @@ describe("The locking module", function() {
     });
 
     it("on an existing and current key", function(done) {
-      var testKey = uuid.v1();
       async.waterfall([
         function(callback) { lock.acquireLock(testKey, 5, 60, callback); },
         function(firstLockId, callback) {
@@ -124,7 +132,6 @@ describe("The locking module", function() {
   describe("reaps expired locks", function() {
 
     it("on an empty set", function(done) {
-      var testKey = uuid.v1();
       lock.reapLock(testKey, function(err) {
         if (err) { done(err); }
         client.get(testKey, function(err, value) {
@@ -136,7 +143,6 @@ describe("The locking module", function() {
     });
 
     it("on a populated set", function(done) {
-      var testKey = uuid.v1();
       async.waterfall([
         function(callback) { lock.acquireLock(testKey, 5, 60, callback); },
         function(firstLockId, callback) {
