@@ -30,7 +30,7 @@ describe("The HTTP endpoint", function() {
 
     it("returns 201 and lockId on acquiring a fresh lock", function(done) {
       request(app).post('/lock')
-        .send({key: testKey, concurrentKeys: 1, ttlSeconds: 60})
+        .send({key: testKey, maximumHeldKeys: 1, ttlSeconds: 60})
         .expect(201)
         .expect(function(res) {
           res.body.lockId.should.be.ok;
@@ -39,7 +39,7 @@ describe("The HTTP endpoint", function() {
     });
 
     it("returns 204 when failing to acquire a lock", function(done) {
-      var form = {key: testKey, concurrentKeys: 1, ttlSeconds: 60};
+      var form = {key: testKey, maximumHeldKeys: 1, ttlSeconds: 60};
       request(app).post('/lock').send(form).end(function(err, res) {
         if (err) { done(err); }
         request(app).post('/lock')
@@ -61,7 +61,7 @@ describe("The HTTP endpoint", function() {
     });
 
     it("returns 204 on an existing lock", function(done) {
-      var form = {key: testKey, concurrentKeys: 1, ttlSeconds: 60};
+      var form = {key: testKey, maximumHeldKeys: 1, ttlSeconds: 60};
       request(app).post('/lock').send(form).end(function(err, res) {
         if (err) { done(err); }
         request(app).del('/lock/' + res.body.lockId)

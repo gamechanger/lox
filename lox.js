@@ -29,9 +29,18 @@ if (config.logRequests.toLowerCase() === 'true') {
   }));
 }
 
+/**
+ * POST /lock
+ * Attempt to acquire a shared lock. Acquiring the lock will fail if more than maximumHeldKeys
+ * locks are already being held by other clients. Returns 201 with a JSON object with the acquired
+ * lockId if the lock was successfully acquired otherwise 204.
+ * @param {string} key the identifier of the shared lock to acquire
+ * @param {integer} maximumHeldKeys the maximum number of currently held locks to successfully acquire a lock
+ * @param {number} ttlSeconds the number of seconds for which to hold the lock
+ */
 app.post('/lock', function(req, res) {
 
-  if (req.body.key === undefined || req.body.concurrentKeys === undefined || req.body.ttlSeconds === undefined) {
+  if (req.body.key === undefined || req.body.maximumHeldKeys === undefined || req.body.ttlSeconds === undefined) {
     return res.send(400);
   }
 
@@ -40,7 +49,7 @@ app.post('/lock', function(req, res) {
       lock.reapLock(req.body.key, callback);
     },
     function(callback) {
-      lock.acquireLock(req.body.key, req.body.concurrentKeys, req.body.ttlSeconds, function(err, lockId) {
+      lock.acquireLock(req.body.key, req.body.maximumHeldKeys, req.body.ttlSeconds, function(err, lockId) {
         if (err) {
           return callback(err);
         }
@@ -55,6 +64,11 @@ app.post('/lock', function(req, res) {
   });
 });
 
+/**
+ * DELETE /lock/:lockId
+ * Release any lock that is currently held with the passed lockId. Returns 204.
+ * @param {string} lockId the lockId to release
+ */
 app.delete('/lock/:lockId', function(req, res) {
   if (req.params.lockId === undefined) { return res.send(400); }
 
