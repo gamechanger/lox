@@ -16,9 +16,10 @@
   },
   "devDependencies": {
     "mocha": "^1.20.1",
-    "should": "^4.0.4"
+    "should": "^4.0.4",
+    "request": "^2.36.0"
   },
   "scripts": {
-    "test": "mocha test --spec reporter"
+    "test": "LOX_PORT=9050 TOKEN=bagel mocha test --spec reporter"
   }
 }
