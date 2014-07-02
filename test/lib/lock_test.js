@@ -2,8 +2,8 @@ require('should');
 
 var uuid = require('node-uuid');
 var async = require('async');
-var lock = require('../lock');
-var client = require('../redis-client');
+var lock = require('../../lib/lock');
+var client = require('../../lib/redis-client');
 
 describe("The locking module", function() {
 

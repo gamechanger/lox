@@ -4,7 +4,7 @@ var request = require('request');
 var uuid = require('node-uuid');
 
 var app = require('../lox');
-var config = require('../config');
+var config = require('../lib/config');
 
 describe("The HTTP endpoint", function() {
 

@@ -9,8 +9,8 @@ var app = express();
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
-var lock = require('./lock');
-var config = require('./config');
+var lock = require('./lib/lock');
+var config = require('./lib/config');
 
 if (config.logRequests.toLowerCase() === 'true') {
   app.use(expressWinston.logger({
@@ -48,9 +48,7 @@ app.post('/lock', function(req, res) {
       });
     }
   ], function(err) {
-    if (err) {
-      return res.send(500);
-    }
+      if (err) { return res.send(500); }
   });
 });
 
