@@ -9,7 +9,7 @@ var config = require('../config');
 describe("The HTTP endpoint", function() {
 
   describe("POST /lock", function() {
-    var url = 'http://localhost:' + config.lox_port + '/lock';
+    var url = 'http://localhost:' + config.port + '/lock';
 
     it("returns 401 without token", function(done) {
       request.post({url: url, form: {}}, function(err, res, body) {
@@ -62,7 +62,7 @@ describe("The HTTP endpoint", function() {
   });
 
   describe("DELETE /lock/:lockId", function() {
-    var url = 'http://localhost:' + config.lox_port + '/lock';
+    var url = 'http://localhost:' + config.port + '/lock';
     var fullUrl = url + '/exampleLockId';
 
     it("returns 401 without token", function(done) {

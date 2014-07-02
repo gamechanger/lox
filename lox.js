@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
 var async = require('async');
+var winston = require('winston');
+var expressWinston = require('express-winston');
 
 var app = express();
 app.use(bodyParser.urlencoded());
@@ -9,6 +11,19 @@ app.use(bodyParser.json());
 
 var lock = require('./lock');
 var config = require('./config');
+
+if (config.logRequests.toLowerCase() === 'true') {
+  app.use(expressWinston.logger({
+    transports: [
+      new winston.transports.Console({
+        json: true,
+        colorize: true
+      })
+    ],
+    meta: config.debug.toLowerCase() === 'true' ? true : false,
+    msg: "{{res.statusCode}} HTTP {{req.method}} {{req.url}}"
+  }));
+}
 
 app.post('/lock', function(req, res) {
 
@@ -51,8 +66,8 @@ app.delete('/lock/:lockId', function(req, res) {
   });
 });
 
-app.listen(config.lox_port, function() {
-  console.log('lox server listening on port ' + config.lox_port);
+app.listen(config.port, function() {
+  winston.info('lox server listening on port ' + config.port);
 });
 
 module.exports = app;
