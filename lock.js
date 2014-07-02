@@ -4,20 +4,14 @@ var client = require('./redis-client');
 
 exports.reapLock = function(key, callback) {
   client.smembers(key, function(err, members) {
-    if (err) {
-      return callback(err);
-    }
+    if (err) { return callback(err); }
 
     iterator = function(member, callback) {
       client.get(member, function(err, value) {
-        if (err) {
+        if (err || value) { return callback(err); }
+        client.srem(key, member, function(err) {
           return callback(err);
-        }
-        if (!value) {
-          client.srem(key, member, function(err) {
-            return callback(err);
-          });
-        }
+        });
       });
     }
 
@@ -29,12 +23,8 @@ exports.acquireLock = function(key, maximumHeldLocks, ttlSeconds, callback) {
   var lockId = uuid.v1();
   client.watch(key);
   client.scard(key, function(err, cardinality) {
-    if (err) {
-      return callback(err, null);
-    }
-    if (cardinality >= maximumHeldLocks) {
-      return callback(err, null);
-    }
+    if (err) { return callback(err, null); }
+    if (cardinality >= maximumHeldLocks) { return callback(err, null); }
     client.multi()
       .sadd(key, lockId)
       .setex(lockId, ttlSeconds, key)
@@ -49,9 +39,7 @@ exports.acquireLock = function(key, maximumHeldLocks, ttlSeconds, callback) {
 
 exports.releaseLock = function(lockId, callback) {
   client.get(lockId, function(err, key) {
-    if (err) {
-      return callback(err, null);
-    }
+    if (err) { return callback(err); }
     client
       .multi()
       .srem(key, lockId)
