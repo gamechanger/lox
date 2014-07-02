@@ -4,15 +4,22 @@
   "version": "0.0.1",
   "homepage": "http://github.com/gamechanger/lox",
   "bugs": "http://github.com/gamechanger/lox/issues",
-  "keywords": ["distributed", "lock"],
+  "keywords": [
+    "distributed",
+    "lock"
+  ],
   "author": "GameChanger <gc.io>",
   "contributors": [
-    {"name": "Travis Thieman",
-     "email": "travis@gc.io",
-     "url": "http://github.com/thieman"},
-    {"name": "Tom Leach",
-     "email": "tom@gc.io",
-     "url": "http://github.com/tleach"}
+    {
+      "name": "Travis Thieman",
+      "email": "travis@gc.io",
+      "url": "http://github.com/thieman"
+    },
+    {
+      "name": "Tom Leach",
+      "email": "tom@gc.io",
+      "url": "http://github.com/tleach"
+    }
   ],
   "repository": {
     "type": "git",
@@ -33,7 +40,8 @@
   "devDependencies": {
     "mocha": "^1.20.1",
     "should": "^4.0.4",
-    "request": "^2.36.0"
+    "request": "^2.36.0",
+    "supertest": "^0.13.0"
   },
   "scripts": {
     "test": "LOX_PORT=9050 mocha test --recursive --spec reporter"
