@@ -27,7 +27,6 @@ if (config.logRequests.toLowerCase() === 'true') {
 
 app.post('/lock', function(req, res) {
 
-  if (config.token && req.body.token !== config.token) { return res.send(401); }
   if (req.body.key === undefined || req.body.concurrentKeys === undefined || req.body.ttlSeconds === undefined) {
     return res.send(400);
   }
@@ -53,7 +52,6 @@ app.post('/lock', function(req, res) {
 });
 
 app.delete('/lock/:lockId', function(req, res) {
-  if (config.token && req.body.token !== config.token) { return res.send(401); }
   if (req.params.lockId === undefined) { return res.send(400); }
 
   lock.releaseLock(req.body.lockId, function(err) {

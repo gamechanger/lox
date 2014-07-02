@@ -20,6 +20,6 @@
     "request": "^2.36.0"
   },
   "scripts": {
-    "test": "LOX_PORT=9050 LOX_TOKEN=bagel mocha test --recursive --spec reporter"
+    "test": "LOX_PORT=9050 mocha test --recursive --spec reporter"
   }
 }
