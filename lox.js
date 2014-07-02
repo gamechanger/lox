@@ -12,12 +12,16 @@ app.use(bodyParser.json());
 var lock = require('./lib/lock');
 var config = require('./lib/config');
 
+var logger = new (winston.Logger)();
+logger.add(winston.transports.Console, {timestamp: true});
+
 if (config.logRequests.toLowerCase() === 'true') {
   app.use(expressWinston.logger({
     transports: [
       new winston.transports.Console({
         json: true,
-        colorize: true
+        colorize: true,
+        timestamp: true
       })
     ],
     meta: config.debug.toLowerCase() === 'true' ? true : false,
@@ -63,7 +67,7 @@ app.delete('/lock/:lockId', function(req, res) {
 });
 
 app.listen(config.port, function() {
-  winston.info('lox server listening on port ' + config.port);
+  logger.info('lox server listening on port ' + config.port);
 });
 
 module.exports = app;
