@@ -1,8 +1,24 @@
 {
   "name": "lox",
-  "description": "lox",
+  "description": "Distributed lock service with an HTTP API",
   "version": "0.0.1",
-  "main": "lox.js",
+  "homepage": "http://github.com/gamechanger/lox",
+  "bugs": "http://github.com/gamechanger/lox/issues",
+  "keywords": ["distributed", "lock"],
+  "author": "GameChanger <gc.io>",
+  "contributors": [
+    {"name": "Travis Thieman",
+     "email": "travis@gc.io",
+     "url": "http://github.com/thieman"},
+    {"name": "Tom Leach",
+     "email": "tom@gc.io",
+     "url": "http://github.com/tleach"}
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/gamechanger/lox"
+  },
+  "main": "./lox.js",
   "dependencies": {
     "express": "^4.4.5",
     "redis": "^0.10.3",
