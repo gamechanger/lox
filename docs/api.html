@@ -116,7 +116,12 @@
             <div class="col-md-9" role="main">
                 <div class="page-header">
                     <h1>lox API documentation</h1>
-                    <p>/</p>
+                    <p>http://lox.yourdomain.com</p>
+
+                    
+                        <h3 id="Lox--A-simple-distributed-lock-manager"><a href="#Lox--A-simple-distributed-lock-manager">Lox: A simple distributed lock manager</a></h3>
+                        <p>Lox exposes an HTTP API to help you manage distributed locks. That API is documented here.</p>
+<p>You may also be interested in <a href="http://gamechanger.github.io/lox">the product page</a> or <a href="http://github.com/gamechanger/lox">the GitHub repository</a></p>
 
                     
                 </div>
@@ -128,6 +133,11 @@
                         </div>
 
                         <div class="panel-body">
+                            
+                                <div class="resource-description">
+                                    <p>Endpoints to acquire and release distributed locks</p>
+
+                                </div>
                             
 
                             <div class="panel-group">
@@ -234,7 +244,7 @@
                                                     
                                                 </em>
 
-                                                <p>The maximum allowable number of currently held keys. If this many keys are already held, acquisition will fail</p>
+                                                <p>The maximum allowable number of currently held keys. If this many keys or more are already held, acquisition will fail</p>
 
                                                 
                                                 
@@ -300,21 +310,11 @@
                                         
                                     
                                         <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
-                                        <p>Could not acquire a shared lock</p>
+                                        <p>Could not acquire a shared lock subject to <code>maximumHeldKeys</code></p>
 
 
                                         
 
-                                        
-                                            <h3>Body</h3>
-                                            
-                                                <p><strong>Type: application/json</strong></p>
-                                                
-                                                
-                                                    <strong>Example:</strong>
-                                                    <pre><span class="hljs-rules">{<span class="hljs-rule">}</span></span></pre>
-                                                
-                                            
                                         
                                     
                                 </div>
@@ -442,16 +442,6 @@
 
                                         
 
-                                        
-                                            <h3>Body</h3>
-                                            
-                                                <p><strong>Type: application/json</strong></p>
-                                                
-                                                
-                                                    <strong>Example:</strong>
-                                                    <pre><span class="hljs-rules">{<span class="hljs-rule">}</span></span></pre>
-                                                
-                                            
                                         
                                     
                                 </div>
