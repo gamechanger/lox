@@ -41,9 +41,11 @@
     "mocha": "^1.20.1",
     "should": "^4.0.4",
     "request": "^2.36.0",
-    "supertest": "^0.13.0"
+    "supertest": "^0.13.0",
+    "raml2html": "^0.23.1"
   },
   "scripts": {
-    "test": "LOX_PORT=9050 mocha test --recursive --spec reporter"
+    "test": "LOX_PORT=9050 mocha test --recursive --spec reporter",
+    "docs": "raml2html docs/api.raml > docs/api.html"
   }
 }

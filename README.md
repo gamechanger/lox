@@ -50,13 +50,13 @@ Let's say we have two nodes, Node A and Node B. They both try to deploy at the s
 ```
 POST /lock
 {
-  key: "nodes-a-and-b",
-  maximumHeldKeys: 1,
+  key: "shared-deploy-key",
+  maximumLocks: 1,
   ttlSeconds: 60
 }
 ```
 
-Each node wants a piece of the same shared lock, `nodes-a-and-b`. By passing `maximumHeldKeys` of `1`, they let Lox know that they are only willing to accept a lock if they would be the only client holding a lock on `nodes-a-and-b`. Finally, they let Lox know they only want the lock for 60 seconds through `ttlSeconds`.
+Each node wants a piece of the same shared lock, `shared-deploy-key`. By passing `maximumLocks` of `1`, they let Lox know that they are only willing to accept a lock if they would be the only client holding a lock on `shared-deploy-key`. Finally, they let Lox know they only want the lock for 60 seconds through `ttlSeconds`.
 
 Assuming these requests go out simultaneously, one node will get a lock and see this response:
 

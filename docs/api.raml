@@ -19,10 +19,10 @@ documentation:
         description: An identifier for the shared lock you want to acquire
         example: lox.shared.lock.123
         required: true
-      maximumHeldKeys:
-        displayName: maximumHeldKeys
+      maximumLocks:
+        displayName: maximumLocks
         type: integer
-        description: The maximum allowable number of currently held keys. If this many keys or more are already held, acquisition will fail
+        description: The maximum allowable number of held locks after a successful lock acquisition. If this many locks or more are already held, acquisition will fail.
         example: 5
         required: true
       ttlSeconds:
@@ -39,7 +39,7 @@ documentation:
             example: |
               {"lockId": "3885b1e0-022c-11e4-b7c7-6b932dd1bfa1"}
       204:
-        description: Could not acquire a shared lock subject to `maximumHeldKeys`
+        description: Could not acquire a shared lock subject to `maximumLocks`
   /{lockId}:
     delete:
       description: Release a held lock.

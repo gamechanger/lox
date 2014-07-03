@@ -31,16 +31,16 @@ if (config.log_requests.toLowerCase() === 'true') {
 
 /**
  * POST /lock
- * Attempt to acquire a shared lock. Acquiring the lock will fail if more than maximumHeldKeys
- * locks are already being held by other clients. Returns 201 with a JSON object with the acquired
+ * Attempt to acquire a shared lock. Acquiring the lock will fail if maxiumLocks or more
+ * are already being held by other clients. Returns 201 with a JSON object with the acquired
  * lockId if the lock was successfully acquired otherwise 204.
  * @param {string} key the identifier of the shared lock to acquire
- * @param {integer} maximumHeldKeys the maximum number of locks that can already be held for acquisition to not fail
+ * @param {integer} maximumLocks the maximum number of locks that can be held after a successful lock acquisition
  * @param {number} ttlSeconds the number of seconds for which to hold the lock
  */
 app.post('/lock', function(req, res) {
 
-  if (req.body.key === undefined || req.body.maximumHeldKeys === undefined || req.body.ttlSeconds === undefined) {
+  if (req.body.key === undefined || req.body.maximumLocks === undefined || req.body.ttlSeconds === undefined) {
     return res.send(400);
   }
 
@@ -49,7 +49,7 @@ app.post('/lock', function(req, res) {
       lock.reapLock(req.body.key, callback);
     },
     function(callback) {
-      lock.acquireLock(req.body.key, req.body.maximumHeldKeys, req.body.ttlSeconds, function(err, lockId) {
+      lock.acquireLock(req.body.key, req.body.maximumLocks, req.body.ttlSeconds, function(err, lockId) {
         if (err) {
           return callback(err);
         }
