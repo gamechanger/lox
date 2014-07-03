@@ -11,11 +11,11 @@ npm install
 node lox.js
 ```
 
-If Docker is more your style, a public image is provided at `thieman/lox`. Versions are tagged to correspond with the tags in this repository. You can also build your own image with the `Dockerfile` in this repository.
+If Docker is more your style, a public image is provided at `gamechanger/lox`. Versions are tagged to correspond with the tags in this repository. You can also build your own image with the `Dockerfile` in this repository.
 
 ```
-docker pull thieman/lox:latest
-docker run -p 80:80 thieman/lox:latest
+docker pull gamechanger/lox:latest
+docker run -p 80:80 gamechanger/lox:latest
 ```
 
 ### Getting Started
