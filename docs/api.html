@@ -234,7 +234,7 @@
                                             </li>
                                         
                                             <li>
-                                                <strong>maximumHeldKeys</strong>
+                                                <strong>maximumLocks</strong>
                                                 <em>
                                                     
                                                         required
@@ -244,7 +244,7 @@
                                                     
                                                 </em>
 
-                                                <p>The maximum allowable number of currently held keys. If this many keys or more are already held, acquisition will fail</p>
+                                                <p>The maximum allowable number of held locks after a successful lock acquisition. If this many locks or more are already held, acquisition will fail.</p>
 
                                                 
                                                 
@@ -310,7 +310,7 @@
                                         
                                     
                                         <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
-                                        <p>Could not acquire a shared lock subject to <code>maximumHeldKeys</code></p>
+                                        <p>Could not acquire a shared lock subject to <code>maximumLocks</code></p>
 
 
                                         
