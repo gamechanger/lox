@@ -40,3 +40,48 @@ LOX_REDIS_HOST=redis.gamechanger.io node lox.js
 ### HTTP API
 
 The HTTP API has a whopping two endpoints and is [documented here](http://gamechanger.github.io/lox/docs/api.html).
+
+### Example Usage
+
+At [GameChanger](http://gc.com), we use Lox to manage our deploy process. We can have multiple clusters of varying sizes all deploying at various rates that they self-determine. Lox's lock expiration also prevents us from running into deadlocks.
+
+Let's say we have two nodes, Node A and Node B. They both try to deploy at the same time, but they know they are the only two nodes of their kind so they only want to deploy one at a time. They each make a request to Lox that looks like this:
+
+```
+POST /lock
+{
+  key: "nodes-a-and-b",
+  maximumHeldKeys: 1,
+  ttlSeconds: 60
+}
+```
+
+Each node wants a piece of the same shared lock, `nodes-a-and-b`. By passing `maximumHeldKeys` of `1`, they let Lox know that they are only willing to accept a lock if they would be the only client holding a lock on `nodes-a-and-b`. Finally, they let Lox know they only want the lock for 60 seconds through `ttlSeconds`.
+
+Assuming these requests go out simultaneously, one node will get a lock and see this response:
+
+```
+201 CREATED
+{
+  lockId: "some-automatically-generated-uuid"
+}
+```
+
+And the other will see this, indicating it was not granted a lock:
+
+```
+204 NO CONTENT
+{}
+```
+
+That's all there is to it! If the node that got the lock finishes and wants to release the lock, it takes the `lockId` it got from its request and calls:
+
+```
+DELETE /lock/:lockId
+```
+
+### Contributing
+
+To run tests locally, make sure you've pointed Lox to a Redis that isn't part of your production stack, then run `npm test`. If you want to run a local Redis for testing, [Docker](http://docker.io) is great for that.
+
+Issues and pull requests are warmly received in the spirit of friendship.
