@@ -39,7 +39,7 @@ LOX_REDIS_HOST=redis.gamechanger.io node lox.js
 
 ### HTTP API
 
-The HTTP API has a whopping two endpoints and is [documented here](http://gamechanger.github.io/lox/docs/api.html).
+The HTTP API has a whopping three endpoints and is [documented here](http://gamechanger.github.io/lox/docs/api.html).
 
 ### Example Usage
 

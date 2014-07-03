@@ -8,6 +8,13 @@ documentation:
       Lox exposes an HTTP API to help you manage distributed locks. That API is documented here.
 
       You may also be interested in [the product page](http://gamechanger.github.io/lox) or [the GitHub repository](http://github.com/gamechanger/lox)
+/health:
+  description: Health check endpoint
+  get:
+    description: Returns 200 if the service is available
+    responses:
+      200:
+        description: The Lox service is available and serving requests
 /lock:
   description: Endpoints to acquire and release distributed locks
   post:
