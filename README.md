@@ -45,7 +45,7 @@ The HTTP API has a whopping two endpoints and is [documented here](http://gamech
 
 At [GameChanger](http://gc.com), we use Lox to manage our deploy process. We can have multiple clusters of varying sizes all deploying at various rates that they self-determine. Lox's lock expiration also prevents us from running into deadlocks.
 
-Let's say we have two nodes, Node A and Node B. They both try to deploy at the same time, but they know they are the only two nodes of their kind so they only want to deploy one at a time. They each make a request to Lox that looks like this:
+Let's say we have two nodes, Node A and Node B. They both try to deploy at the same time, but they know they are the only two nodes of their kind so they only want to deploy one at a time so their service remains available. They each make a request to Lox that looks like this:
 
 ```
 POST /lock
