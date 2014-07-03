@@ -1,8 +1,6 @@
-![](http://i.imgur.com/M6O2YgB.png)
+## Lox: A simple distributed lock manager
 
 [![Build Status](https://travis-ci.org/gamechanger/lox.svg?branch=master)](https://travis-ci.org/gamechanger/lox)
-
-## Lox: A simple distributed lock manager
 
 ### Installation
 
