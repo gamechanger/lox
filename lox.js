@@ -35,7 +35,7 @@ if (config.log_requests.toLowerCase() === 'true') {
  * locks are already being held by other clients. Returns 201 with a JSON object with the acquired
  * lockId if the lock was successfully acquired otherwise 204.
  * @param {string} key the identifier of the shared lock to acquire
- * @param {integer} maximumHeldKeys the maximum number of currently held locks to successfully acquire a lock
+ * @param {integer} maximumHeldKeys the maximum number of locks that can already be held for acquisition to not fail
  * @param {number} ttlSeconds the number of seconds for which to hold the lock
  */
 app.post('/lock', function(req, res) {
