@@ -71,7 +71,6 @@ And the other will see this, indicating it was not granted a lock:
 
 ```
 204 NO CONTENT
-{}
 ```
 
 That's all there is to it! If the node that got the lock finishes and wants to release the lock, it takes the `lockId` it got from its request and calls:
@@ -84,7 +83,6 @@ It then receives:
 
 ```
 204 NO CONTENT
-{}
 ```
 
 ### Contributing
