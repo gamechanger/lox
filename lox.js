@@ -15,7 +15,7 @@ var config = require('./lib/config');
 var logger = new (winston.Logger)();
 logger.add(winston.transports.Console, {timestamp: true});
 
-if (config.logRequests.toLowerCase() === 'true') {
+if (config.log_requests.toLowerCase() === 'true') {
   app.use(expressWinston.logger({
     transports: [
       new winston.transports.Console({
