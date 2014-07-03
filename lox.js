@@ -29,6 +29,10 @@ if (config.log_requests.toLowerCase() === 'true') {
   }));
 }
 
+app.get('/health', function(req, res) {
+  return res.send(200);
+});
+
 /**
  * POST /lock
  * Attempt to acquire a shared lock. Acquiring the lock will fail if maxiumLocks or more
