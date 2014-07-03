@@ -80,6 +80,13 @@ That's all there is to it! If the node that got the lock finishes and wants to r
 DELETE /lock/:lockId
 ```
 
+It then receives:
+
+```
+204 NO CONTENT
+{}
+```
+
 ### Contributing
 
 To run tests locally, make sure you've pointed Lox to a Redis that isn't part of your production stack, then run `npm test`. If you want to run a local Redis for testing, [Docker](http://docker.io) is great for that.
