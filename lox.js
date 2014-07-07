@@ -76,7 +76,7 @@ app.post('/lock', function(req, res) {
 app.delete('/lock/:lockId', function(req, res) {
   if (req.params.lockId === undefined) { return res.send(400); }
 
-  lock.releaseLock(req.body.lockId, function(err) {
+  lock.releaseLock(req.params.lockId, function(err) {
     if (err) {
       return res.send(500);
     }
