@@ -7,7 +7,7 @@ services:
   - redis
 script:
   - cd $REPO
-  - npm rebuild
+  - npm install
   - npm test
   - tests_complete lox
 notify:
