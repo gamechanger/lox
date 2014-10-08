@@ -45,7 +45,7 @@
     "raml2html": "^0.23.1"
   },
   "scripts": {
-    "test": "LOX_PORT=9050 mocha test --recursive --spec reporter",
+    "test": "LOX_PORT=9050 node_modules/.bin/mocha test --recursive --spec reporter",
     "docs": "raml2html docs/api.raml > docs/api.html"
   }
 }
