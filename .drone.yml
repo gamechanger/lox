@@ -1,0 +1,18 @@
+image: docker.gamechanger.io/test/lox
+git:
+  depth: 10
+env:
+  - REPO=/var/cache/drone/src/github.com/gamechanger/lox
+services:
+  - redis
+script:
+  - cd $REPO
+  - npm rebuild
+  - npm test
+  - tests_complete lox
+notify:
+  webhook:
+    urls:
+      - http://localhost:7777/webhook
+    on_success: true
+    on_failure: true
