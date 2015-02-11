@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 var lock = require('./lib/lock');
 var config = require('./lib/config');
+var lua = require('./lib/lua');
 
 var logger = new (winston.Logger)();
 logger.add(winston.transports.Console, {timestamp: true});

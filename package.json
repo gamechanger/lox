@@ -1,7 +1,7 @@
 {
   "name": "lox",
   "description": "Distributed lock service with an HTTP API",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "http://github.com/gamechanger/lox",
   "bugs": "http://github.com/gamechanger/lox/issues",
   "keywords": [
@@ -35,7 +35,8 @@
     "node-uuid": "^1.4.1",
     "underscore": "^1.6.0",
     "async": "^0.9.0",
-    "express-winston": "^0.2.6"
+    "express-winston": "^0.2.6",
+    "underscore.string": "^3.0.3"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
