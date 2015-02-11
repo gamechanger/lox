@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 var lock = require('./lib/lock');
 var config = require('./lib/config');
+var lua = require('./lib/lua');
 
 var logger = new (winston.Logger)();
 logger.add(winston.transports.Console, {timestamp: true});
@@ -83,6 +84,8 @@ app.delete('/lock/:lockId', function(req, res) {
     return res.send(204);
   });
 });
+
+lua.initialize();
 
 app.listen(config.port, function() {
   logger.info('lox server listening on port ' + config.port);
