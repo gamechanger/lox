@@ -85,8 +85,6 @@ app.delete('/lock/:lockId', function(req, res) {
   });
 });
 
-lua.initialize();
-
 app.listen(config.port, function() {
   logger.info('lox server listening on port ' + config.port);
 });
