@@ -1,6 +1,6 @@
 #%RAML 0.8
 ---
-title: lox
+title: Lox
 baseUri: "http://lox.yourdomain.com"
 documentation:
   - title: "Lox: A simple distributed lock manager"
@@ -8,8 +8,15 @@ documentation:
       Lox exposes an HTTP API to help you manage distributed locks. That API is documented here.
 
       You may also be interested in [the product page](http://gamechanger.github.io/lox) or [the GitHub repository](http://github.com/gamechanger/lox)
+/health:
+  description: Health check endpoint
+  get:
+    description: Returns 200 if the service is available
+    responses:
+      200:
+        description: The Lox service is available and serving requests
 /lock:
-  description: Endpoints to acquire and release distributed locks
+  description: Endpoints to acquire and release a single distributed lock
   post:
     description: Attempt to acquire a shared lock.
     queryParameters:
@@ -19,10 +26,10 @@ documentation:
         description: An identifier for the shared lock you want to acquire
         example: lox.shared.lock.123
         required: true
-      maximumHeldKeys:
-        displayName: maximumHeldKeys
+      maximumLocks:
+        displayName: maximumLocks
         type: integer
-        description: The maximum allowable number of currently held keys. If this many keys or more are already held, acquisition will fail
+        description: The maximum allowable number of held locks after a successful lock acquisition. If this many locks or more are already held, acquisition will fail.
         example: 5
         required: true
       ttlSeconds:
@@ -39,7 +46,7 @@ documentation:
             example: |
               {"lockId": "3885b1e0-022c-11e4-b7c7-6b932dd1bfa1"}
       204:
-        description: Could not acquire a shared lock subject to `maximumHeldKeys`
+        description: Could not acquire a shared lock subject to `maximumLocks`
   /{lockId}:
     delete:
       description: Release a held lock.
@@ -53,3 +60,37 @@ documentation:
       responses:
         204:
           description: If a lock was held, it has been released
+/locks:
+  description: Endpoints to acquire multiple distributed locks
+  post:
+    description: Attempt to acquire multiple distributed locks subject to the same constraints on availability and TTL. Acquisition is all-or-nothing.
+    queryParameters:
+      keys:
+        displayName: keys
+        description: A list of string identifiers for the shared locks you want to acquire.
+        example: '["lox.shared.lock.123", "lox.shared.lock.456"]'
+        required: true
+      maximumLocks:
+        displayName: maximumLocks
+        type: integer
+        description: The maximum allowable number of held locks after a successful lock acquisition. If this many locks or more are already held by *any* of the keys, acquisition of *all* locks in the request will fail.
+        example: 5
+        required: true
+      ttlSeconds:
+        displayName: ttlSeconds
+        type: number
+        description: The number of seconds for which to hold each lock.
+        example: 60
+        required: true
+    responses:
+      201:
+        description: Successfully acquired a shared lock on every key in `keys`
+        body:
+          application/json:
+            example: |
+              {"lockIds":
+                {"lox.shared.lock.123": "3885b1e0-022c-11e4-b7c7-6b932dd1bfa1",
+                 "lox.shared.lock.456": "3885b1e1-022c-11e4-b7c7-6b932dd1bfa1"}
+              }
+      204:
+        description: Could not acquire these shared locks subject to `maximumLocks`
