@@ -1,20 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Lox API documentation</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="generator" content="https://github.com/kevinrenskers/raml2html">
+<!DOCTYPE HTML><html><head><title>Lox API documentation</title><meta http-equiv=X-UA-Compatible content="IE=edge"><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta name=generator content="https://github.com/kevinrenskers/raml2html 0.30.0"><link rel=stylesheet href=http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css><link rel=stylesheet href=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css><script type=text/javascript src=http://code.jquery.com/jquery-1.11.0.min.js></script><script type=text/javascript src=http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js></script><script type=text/javascript src=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js></script><script type=text/javascript>
+        $(document).ready(function() {
+            $('.page-header pre code, .top-resource-description pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
 
-    <script type="text/javascript">
-        var protocol = ((document.location.protocol === 'https:') ? 'https:': 'http:');
-        document.write('<link rel="stylesheet" href="' + protocol + '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">');
-        document.write('<link rel="stylesheet" href="' + protocol + '//yandex.st/highlightjs/8.0/styles/github.min.css">');
-        document.write('<script type="text/javascript" src="' + protocol + '//code.jquery.com/jquery-1.11.0.min.js"><\/sc' + 'ript>');
-        document.write('<script type="text/javascript" src="' + protocol + '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"><\/sc' + 'ript>');
-    </script>
-
-    <style>
+            $('[data-toggle]').click(function() {
+                var selector = $(this).data('target') + ' pre code';
+                $(selector).each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+            });
+        });
+    </script><style>
+        .hljs {
+            background: transparent;
+        }
         .parent {
             color: #999;
         }
@@ -22,7 +22,7 @@
             float: none;
             margin-right: 6px;
         }
-        .panel-title > .block > .methods {
+        .panel-title > .methods {
             float: right;
         }
         .badge {
@@ -32,12 +32,6 @@
             font-weight: normal;
             color: #f3f3f6;
             line-height: normal;
-        }
-        .block .badge {
-            visibility: hidden;
-        }
-        .block.collapsed .badge {
-            visibility: visible;
         }
         .badge_get {
             background-color: #63a8e2;
@@ -50,9 +44,6 @@
         }
         .badge_delete {
             background-color: #d26460;
-        }
-        .block {
-            display: block;
         }
         .list-group, .panel-group {
             margin-bottom: 0;
@@ -92,11 +83,20 @@
         #sidebar {
             margin-top: 30px;
         }
-        .resource-description {
+        .top-resource-description {
             border-bottom: 1px solid #ddd;
             background: #fcfcfc;
             padding: 15px 15px 0 15px;
             margin: -15px -15px 10px -15px;
+        }
+        .resource-description {
+            border-bottom: 1px solid #fcfcfc;
+            background: #fcfcfc;
+            padding: 15px 15px 0 15px;
+            margin: -15px -15px 10px -15px;
+        }
+        .panel > .panel-body > .panel-group > .panel:first-child .resource-description {
+            display: none;
         }
         .list-group .badge {
             float: left;
@@ -107,485 +107,9 @@
         .method_description p:last-child {
             margin: 0;
         }
-    </style>
-</head>
-
-<body data-spy="scroll" data-target="#sidebar">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9" role="main">
-                <div class="page-header">
-                    <h1>Lox API documentation</h1>
-                    <p>http://lox.yourdomain.com</p>
-
-                    
-                        <h3 id="Lox--A-simple-distributed-lock-manager"><a href="#Lox--A-simple-distributed-lock-manager">Lox: A simple distributed lock manager</a></h3>
-                        <p>Lox exposes an HTTP API to help you manage distributed locks. That API is documented here.</p>
-<p>You may also be interested in <a href="http://gamechanger.github.io/lox">the product page</a> or <a href="http://github.com/gamechanger/lox">the GitHub repository</a></p>
-
-                    
-                </div>
-
-                
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 id="_health" class="panel-title">/health</h3>
-                        </div>
-
-                        <div class="panel-body">
-                            
-                                <div class="resource-description">
-                                    <p>Health check endpoint</p>
-
-                                </div>
-                            
-
-                            <div class="panel-group">
-                                <div class="panel panel-white">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a class="block collapsed" data-toggle="collapse" href="#panel__health">
-                <span class="methods">
-                    
-                        <span class="badge badge_get">get</span>
-                    
-                </span>
-                <span class="parent"></span>/health
-            </a>
-        </h4>
-    </div>
-    <div id="panel__health" class="panel-collapse collapse">
-        <div class="panel-body">
-            <div class="list-group">
-                
-                    <a href="#" data-toggle="modal" data-target="#_health_get" class="list-group-item">
-                        <span class="badge badge_get">get</span>
-                        <div class="method_description">
-                            <p>Returns 200 if the service is available</p>
-
-                        </div>
-                        <div class="clearfix"></div>
-                    </a>
-                
-            </div>
-        </div>
-    </div>
-
-    
-        <div class="modal fade" id="_health_get">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">
-                            <span class="badge badge_get">get</span>
-                            <span class="parent"></span>/health
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-info"><p>Returns 200 if the service is available</p>
-</div>
-
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#_health_get_request" data-toggle="tab">Request</a>
-                            </li>
-                            
-                                <li>
-                                    <a href="#_health_get_response" data-toggle="tab">Response</a>
-                                </li>
-                            
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="_health_get_request">
-                                
-
-                                
-
-                                
-
-                                
-                            </div>
-
-                            
-                                <div class="tab-pane" id="_health_get_response">
-                                    
-                                        <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
-                                        <p>The Lox service is available and serving requests</p>
-
-
-                                        
-
-                                        
-                                    
-                                </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-</div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 id="_lock" class="panel-title">/lock</h3>
-                        </div>
-
-                        <div class="panel-body">
-                            
-                                <div class="resource-description">
-                                    <p>Endpoints to acquire and release distributed locks</p>
-
-                                </div>
-                            
-
-                            <div class="panel-group">
-                                <div class="panel panel-white">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a class="block collapsed" data-toggle="collapse" href="#panel__lock">
-                <span class="methods">
-                    
-                        <span class="badge badge_post">post</span>
-                    
-                </span>
-                <span class="parent"></span>/lock
-            </a>
-        </h4>
-    </div>
-    <div id="panel__lock" class="panel-collapse collapse">
-        <div class="panel-body">
-            <div class="list-group">
-                
-                    <a href="#" data-toggle="modal" data-target="#_lock_post" class="list-group-item">
-                        <span class="badge badge_post">post</span>
-                        <div class="method_description">
-                            <p>Attempt to acquire a shared lock.</p>
-
-                        </div>
-                        <div class="clearfix"></div>
-                    </a>
-                
-            </div>
-        </div>
-    </div>
-
-    
-        <div class="modal fade" id="_lock_post">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">
-                            <span class="badge badge_post">post</span>
-                            <span class="parent"></span>/lock
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-info"><p>Attempt to acquire a shared lock.</p>
-</div>
-
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#_lock_post_request" data-toggle="tab">Request</a>
-                            </li>
-                            
-                                <li>
-                                    <a href="#_lock_post_response" data-toggle="tab">Response</a>
-                                </li>
-                            
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="_lock_post_request">
-                                
-
-                                
-
-                                
-                                    <h3>Query Parameters</h3>
-                                    <ul>
-                                        
-                                            <li>
-                                                <strong>key</strong>
-                                                <em>
-                                                    
-                                                        required
-                                                    
-                                                    
-                                                        (string)
-                                                    
-                                                </em>
-
-                                                <p>An identifier for the shared lock you want to acquire</p>
-
-                                                
-                                                
-                                                    <p>
-                                                        <small>
-                                                            <strong>Example:</strong>
-                                                            <code>lox.shared.lock.123</code>
-                                                        </small>
-                                                    </p>
-                                                
-                                            </li>
-                                        
-                                            <li>
-                                                <strong>maximumLocks</strong>
-                                                <em>
-                                                    
-                                                        required
-                                                    
-                                                    
-                                                        (integer)
-                                                    
-                                                </em>
-
-                                                <p>The maximum allowable number of held locks after a successful lock acquisition. If this many locks or more are already held, acquisition will fail.</p>
-
-                                                
-                                                
-                                                    <p>
-                                                        <small>
-                                                            <strong>Example:</strong>
-                                                            <code>5</code>
-                                                        </small>
-                                                    </p>
-                                                
-                                            </li>
-                                        
-                                            <li>
-                                                <strong>ttlSeconds</strong>
-                                                <em>
-                                                    
-                                                        required
-                                                    
-                                                    
-                                                        (number)
-                                                    
-                                                </em>
-
-                                                <p>The number of seconds for which to hold the lock</p>
-
-                                                
-                                                
-                                                    <p>
-                                                        <small>
-                                                            <strong>Example:</strong>
-                                                            <code>60</code>
-                                                        </small>
-                                                    </p>
-                                                
-                                            </li>
-                                        
-                                    </ul>
-                                
-
-                                
-                            </div>
-
-                            
-                                <div class="tab-pane" id="_lock_post_response">
-                                    
-                                        <h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2>
-                                        <p>Successfully acquired a shared lock</p>
-
-
-                                        
-
-                                        
-                                            <h3>Body</h3>
-                                            
-                                                <p><strong>Type: application/json</strong></p>
-                                                
-                                                
-                                                    <strong>Example:</strong>
-                                                    <pre>{"<span class="hljs-attribute">lockId</span>": <span class="hljs-value"><span class="hljs-string">"3885b1e0-022c-11e4-b7c7-6b932dd1bfa1"</span></span>}
-</pre>
-                                                
-                                            
-                                        
-                                    
-                                        <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
-                                        <p>Could not acquire a shared lock subject to <code>maximumLocks</code></p>
-
-
-                                        
-
-                                        
-                                    
-                                </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-</div>
-
-
-    <div class="panel panel-white">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a class="block collapsed" data-toggle="collapse" href="#panel__lock__lockId_">
-                <span class="methods">
-                    
-                        <span class="badge badge_delete">delete</span>
-                    
-                </span>
-                <span class="parent">/lock</span>/{lockId}
-            </a>
-        </h4>
-    </div>
-    <div id="panel__lock__lockId_" class="panel-collapse collapse">
-        <div class="panel-body">
-            <div class="list-group">
-                
-                    <a href="#" data-toggle="modal" data-target="#_lock__lockId__delete" class="list-group-item">
-                        <span class="badge badge_delete">delete</span>
-                        <div class="method_description">
-                            <p>Release a held lock.</p>
-
-                        </div>
-                        <div class="clearfix"></div>
-                    </a>
-                
-            </div>
-        </div>
-    </div>
-
-    
-        <div class="modal fade" id="_lock__lockId__delete">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">
-                            <span class="badge badge_delete">delete</span>
-                            <span class="parent">/lock</span>/{lockId}
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-info"><p>Release a held lock.</p>
-</div>
-
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#_lock__lockId__delete_request" data-toggle="tab">Request</a>
-                            </li>
-                            
-                                <li>
-                                    <a href="#_lock__lockId__delete_response" data-toggle="tab">Response</a>
-                                </li>
-                            
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="_lock__lockId__delete_request">
-                                
-                                    <h3>URI Parameters</h3>
-                                    <ul>
-                                        
-                                            <li><strong>lockId</strong>: string</li>
-                                        
-                                    </ul>
-                                
-
-                                
-
-                                
-                                    <h3>Query Parameters</h3>
-                                    <ul>
-                                        
-                                            <li>
-                                                <strong>lockId</strong>
-                                                <em>
-                                                    
-                                                        required
-                                                    
-                                                    
-                                                        (string)
-                                                    
-                                                </em>
-
-                                                <p>The lock ID provided by a previously successful lock acquisition</p>
-
-                                                
-                                                
-                                                    <p>
-                                                        <small>
-                                                            <strong>Example:</strong>
-                                                            <code>3885b1e0-022c-11e4-b7c7-6b932dd1bfa1</code>
-                                                        </small>
-                                                    </p>
-                                                
-                                            </li>
-                                        
-                                    </ul>
-                                
-
-                                
-                            </div>
-
-                            
-                                <div class="tab-pane" id="_lock__lockId__delete_response">
-                                    
-                                        <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
-                                        <p>If a lock was held, it has been released</p>
-
-
-                                        
-
-                                        
-                                    
-                                </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-</div>
-
-
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                
-            </div>
-
-            <div class="col-md-3">
-                <div id="sidebar" class="hidden-print affix" role="complementary">
-                    <ul class="nav nav-pills nav-stacked">
-                        
-                            <li><a href="#_health">/health</a></li>
-                        
-                            <li><a href="#_lock">/lock</a></li>
-                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+    </style></head><body data-spy=scroll data-target=#sidebar><div class=container><div class=row><div class=col-md-9 role=main><div class=page-header><h1>Lox API documentation</h1><p>http://lox.yourdomain.com</p><h3 id=Lox--A-simple-distributed-lock-manager><a href=#Lox--A-simple-distributed-lock-manager>Lox: A simple distributed lock manager</a></h3><p>Lox exposes an HTTP API to help you manage distributed locks. That API is documented here.</p><p>You may also be interested in <a href=http://gamechanger.github.io/lox>the product page</a> or <a href=http://github.com/gamechanger/lox>the GitHub repository</a></p></div><div class="panel panel-default"><div class=panel-heading><h3 id=_health class=panel-title>/health</h3></div><div class=panel-body><div class=top-resource-description><p>Health check endpoint</p></div><div class=panel-group><div class="panel panel-white"><div class=panel-heading><h4 class=panel-title><a class=collapsed data-toggle=collapse href=#panel__health><span class=parent></span>/health</a> <span class=methods><a href=# data-toggle=modal data-target=#_health_get><span class="badge badge_get">get</span></a></span></h4></div><div id=panel__health class="panel-collapse collapse"><div class=panel-body><div class=resource-description><p>Health check endpoint</p></div><div class=list-group><a href=# data-toggle=modal data-target=#_health_get class=list-group-item><span class="badge badge_get">get</span><div class=method_description><p>Returns 200 if the service is available</p></div><div class=clearfix></div></a></div></div></div><div class="modal fade" tabindex=0 id=_health_get><div class=modal-dialog><div class=modal-content><div class=modal-header><button type=button class=close data-dismiss=modal aria-hidden=true>&times;</button><h4 class=modal-title id=myModalLabel><span class="badge badge_get">get</span> <span class=parent></span>/health</h4></div><div class=modal-body><div class="alert alert-info"><p>Returns 200 if the service is available</p></div><ul class="nav nav-tabs"><li class=active><a href=#_health_get_request data-toggle=tab>Request</a></li><li><a href=#_health_get_response data-toggle=tab>Response</a></li></ul><div class=tab-content><div class="tab-pane active" id=_health_get_request></div><div class=tab-pane id=_health_get_response><h2>HTTP status code <a href=http://httpstatus.es/200 target=_blank>200</a></h2><p>The Lox service is available and serving requests</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h3 id=_lock class=panel-title>/lock</h3></div><div class=panel-body><div class=top-resource-description><p>Endpoints to acquire and release a single distributed lock</p></div><div class=panel-group><div class="panel panel-white"><div class=panel-heading><h4 class=panel-title><a class=collapsed data-toggle=collapse href=#panel__lock><span class=parent></span>/lock</a> <span class=methods><a href=# data-toggle=modal data-target=#_lock_post><span class="badge badge_post">post</span></a></span></h4></div><div id=panel__lock class="panel-collapse collapse"><div class=panel-body><div class=resource-description><p>Endpoints to acquire and release a single distributed lock</p></div><div class=list-group><a href=# data-toggle=modal data-target=#_lock_post class=list-group-item><span class="badge badge_post">post</span><div class=method_description><p>Attempt to acquire a shared lock.</p></div><div class=clearfix></div></a></div></div></div><div class="modal fade" tabindex=0 id=_lock_post><div class=modal-dialog><div class=modal-content><div class=modal-header><button type=button class=close data-dismiss=modal aria-hidden=true>&times;</button><h4 class=modal-title id=myModalLabel><span class="badge badge_post">post</span> <span class=parent></span>/lock</h4></div><div class=modal-body><div class="alert alert-info"><p>Attempt to acquire a shared lock.</p></div><ul class="nav nav-tabs"><li class=active><a href=#_lock_post_request data-toggle=tab>Request</a></li><li><a href=#_lock_post_response data-toggle=tab>Response</a></li></ul><div class=tab-content><div class="tab-pane active" id=_lock_post_request><h3>Query Parameters</h3><ul><li><strong>key</strong> <em>required (string)</em><p>An identifier for the shared lock you want to acquire</p><p><small><strong>Example</strong>:<pre><code>lox.shared.lock.123</code></pre></small></p></li><li><strong>maximumLocks</strong> <em>required (integer)</em><p>The maximum allowable number of held locks after a successful lock acquisition. If this many locks or more are already held, acquisition will fail.</p><p><small><strong>Example</strong>:<pre><code>5</code></pre></small></p></li><li><strong>ttlSeconds</strong> <em>required (number)</em><p>The number of seconds for which to hold the lock</p><p><small><strong>Example</strong>:<pre><code>60</code></pre></small></p></li></ul></div><div class=tab-pane id=_lock_post_response><h2>HTTP status code <a href=http://httpstatus.es/201 target=_blank>201</a></h2><p>Successfully acquired a shared lock</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><small><strong>Example</strong>:<pre><code>{"lockId": "3885b1e0-022c-11e4-b7c7-6b932dd1bfa1"}
+</code></pre></small></p><h2>HTTP status code <a href=http://httpstatus.es/204 target=_blank>204</a></h2><p>Could not acquire a shared lock subject to <code>maximumLocks</code></p></div></div></div></div></div></div></div><div class="panel panel-white"><div class=panel-heading><h4 class=panel-title><a class=collapsed data-toggle=collapse href=#panel__lock__lockId_><span class=parent>/lock</span>/{lockId}</a> <span class=methods><a href=# data-toggle=modal data-target=#_lock__lockId__delete><span class="badge badge_delete">delete</span></a></span></h4></div><div id=panel__lock__lockId_ class="panel-collapse collapse"><div class=panel-body><div class=list-group><a href=# data-toggle=modal data-target=#_lock__lockId__delete class=list-group-item><span class="badge badge_delete">delete</span><div class=method_description><p>Release a held lock.</p></div><div class=clearfix></div></a></div></div></div><div class="modal fade" tabindex=0 id=_lock__lockId__delete><div class=modal-dialog><div class=modal-content><div class=modal-header><button type=button class=close data-dismiss=modal aria-hidden=true>&times;</button><h4 class=modal-title id=myModalLabel><span class="badge badge_delete">delete</span> <span class=parent>/lock</span>/{lockId}</h4></div><div class=modal-body><div class="alert alert-info"><p>Release a held lock.</p></div><ul class="nav nav-tabs"><li class=active><a href=#_lock__lockId__delete_request data-toggle=tab>Request</a></li><li><a href=#_lock__lockId__delete_response data-toggle=tab>Response</a></li></ul><div class=tab-content><div class="tab-pane active" id=_lock__lockId__delete_request><h3>URI Parameters</h3><ul><li><strong>lockId</strong>: <em>required (string)</em></li></ul><h3>Query Parameters</h3><ul><li><strong>lockId</strong> <em>required (string)</em><p>The lock ID provided by a previously successful lock acquisition</p><p><small><strong>Example</strong>:<pre><code>3885b1e0-022c-11e4-b7c7-6b932dd1bfa1</code></pre></small></p></li></ul></div><div class=tab-pane id=_lock__lockId__delete_response><h2>HTTP status code <a href=http://httpstatus.es/204 target=_blank>204</a></h2><p>If a lock was held, it has been released</p></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h3 id=_locks class=panel-title>/locks</h3></div><div class=panel-body><div class=top-resource-description><p>Endpoints to acquire multiple distributed locks</p></div><div class=panel-group><div class="panel panel-white"><div class=panel-heading><h4 class=panel-title><a class=collapsed data-toggle=collapse href=#panel__locks><span class=parent></span>/locks</a> <span class=methods><a href=# data-toggle=modal data-target=#_locks_post><span class="badge badge_post">post</span></a></span></h4></div><div id=panel__locks class="panel-collapse collapse"><div class=panel-body><div class=resource-description><p>Endpoints to acquire multiple distributed locks</p></div><div class=list-group><a href=# data-toggle=modal data-target=#_locks_post class=list-group-item><span class="badge badge_post">post</span><div class=method_description><p>Attempt to acquire multiple distributed locks subject to the same constraints on availability and TTL. Acquisition is all-or-nothing.</p></div><div class=clearfix></div></a></div></div></div><div class="modal fade" tabindex=0 id=_locks_post><div class=modal-dialog><div class=modal-content><div class=modal-header><button type=button class=close data-dismiss=modal aria-hidden=true>&times;</button><h4 class=modal-title id=myModalLabel><span class="badge badge_post">post</span> <span class=parent></span>/locks</h4></div><div class=modal-body><div class="alert alert-info"><p>Attempt to acquire multiple distributed locks subject to the same constraints on availability and TTL. Acquisition is all-or-nothing.</p></div><ul class="nav nav-tabs"><li class=active><a href=#_locks_post_request data-toggle=tab>Request</a></li><li><a href=#_locks_post_response data-toggle=tab>Response</a></li></ul><div class=tab-content><div class="tab-pane active" id=_locks_post_request><h3>Query Parameters</h3><ul><li><strong>keys</strong> <em>required (string)</em><p>A list of string identifiers for the shared locks you want to acquire.</p><p><small><strong>Example</strong>:<pre><code>["lox.shared.lock.123", "lox.shared.lock.456"]</code></pre></small></p></li><li><strong>maximumLocks</strong> <em>required (integer)</em><p>The maximum allowable number of held locks after a successful lock acquisition. If this many locks or more are already held by <em>any</em> of the keys, acquisition of <em>all</em> locks in the request will fail.</p><p><small><strong>Example</strong>:<pre><code>5</code></pre></small></p></li><li><strong>ttlSeconds</strong> <em>required (number)</em><p>The number of seconds for which to hold each lock.</p><p><small><strong>Example</strong>:<pre><code>60</code></pre></small></p></li></ul></div><div class=tab-pane id=_locks_post_response><h2>HTTP status code <a href=http://httpstatus.es/201 target=_blank>201</a></h2><p>Successfully acquired a shared lock on every key in <code>keys</code></p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><small><strong>Example</strong>:<pre><code>{"lockIds":
+  {"lox.shared.lock.123": "3885b1e0-022c-11e4-b7c7-6b932dd1bfa1",
+   "lox.shared.lock.456": "3885b1e1-022c-11e4-b7c7-6b932dd1bfa1"}
+}
+</code></pre></small></p><h2>HTTP status code <a href=http://httpstatus.es/204 target=_blank>204</a></h2><p>Could not acquire these shared locks subject to <code>maximumLocks</code></p></div></div></div></div></div></div></div></div></div></div></div><div class=col-md-3><div id=sidebar class="hidden-print affix" role=complementary><ul class="nav nav-pills nav-stacked"><li><a href=#_health>/health</a></li><li><a href=#_lock>/lock</a></li><li><a href=#_locks>/locks</a></li></ul></div></div></div></div></body></html>
