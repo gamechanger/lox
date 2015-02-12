@@ -5,7 +5,7 @@ var uuid = require('node-uuid');
 
 var app = require('../lox');
 var config = require('../lib/config');
-var client = require('../lib/redis-client');
+var client = require('../lib/redis-client').client;
 
 describe("The HTTP endpoint", function() {
   var testKey = null;
