@@ -45,7 +45,7 @@ app.get('/health', function(req, res) {
  */
 app.post('/lock', function(req, res) {
 
-  if (req.body.key === undefined || req.body.maximumLocks === undefined || req.body.ttlSeconds === undefined) {
+  if ([req.body.key, req.body.maximumLocks, req.body.ttlSeconds].some(_.isUndefined)) {
     return res.send(400);
   }
 
@@ -76,7 +76,7 @@ app.post('/lock', function(req, res) {
  */
 app.post('/locks', function(req, res) {
 
-  if (req.body.keys === undefined || req.body.maximumLocks === undefined || req.body.ttlSeconds === undefined) {
+  if ([req.body.keys, req.body.maximumLocks, req.body.ttlSeconds].some(_.isUndefined)) {
     return res.send(400);
   }
 
@@ -102,7 +102,7 @@ app.post('/locks', function(req, res) {
  * @param {string} lockId the lockId to release
  */
 app.delete('/lock/:lockId', function(req, res) {
-  if (req.params.lockId === undefined) { return res.send(400); }
+  if (_.isUndefined(req.params.lockId)) { return res.send(400); }
 
   lock.releaseLock(req.params.lockId, function(err) {
     if (err) {
