@@ -1,5 +1,6 @@
 require('should');
 
+var _ = require('underscore');
 var uuid = require('node-uuid');
 var async = require('async');
 var lock = require('../../lib/lock');
@@ -7,9 +8,11 @@ var client = require('../../lib/redis-client');
 
 describe("The locking module", function() {
   var testKey = null;
+  var testMultipleKeys = null;
 
   beforeEach(function() {
     testKey = uuid.v1();
+    testMultipleKeys = [uuid.v1(), uuid.v1()];
   });
 
   afterEach(function(done) {
@@ -20,7 +23,7 @@ describe("The locking module", function() {
     });
   });
 
-  describe("acquires a lock", function() {
+  describe("acquires a single lock", function() {
 
     it("on a non-existent key", function(done) {
       lock.acquireLock(testKey, 1, 60, function(err, lockId) {
@@ -83,6 +86,83 @@ describe("The locking module", function() {
           });
         }
       ], function(err, result) { done(err); });
+    });
+
+  });
+
+  describe("acquires multiple locks", function() {
+
+    it("on two non-existent keys", function(done) {
+      lock.acquireMultipleLocks(testMultipleKeys, 1, 60, function(err, lockIdMapping) {
+        if (err) { return done(err); }
+        afterDone = _.after(testMultipleKeys.length, done);
+        _.each(lockIdMapping, function(lockId, lockKey) {
+          client.multi()
+            .get(lockId)
+            .ttl(lockId)
+            .smembers(lockKey)
+            .exec(function(err, replies) {
+              if (err) { afterDone(err); }
+              replies[0].should.equal(lockKey);
+              replies[1].should.be.approximately(60, 5);
+              replies[2].should.eql([lockId]);
+              return afterDone(err);
+            });
+        });
+      });
+    });
+
+    it("on existing keys with sufficient availability", function(done) {
+      lock.acquireMultipleLocks(testMultipleKeys, 1, 60, function(err, lockIdMapping) {
+        if (err) { return done(err); }
+        lockIdMapping.should.be.ok;
+        _.keys(lockIdMapping).length.should.equal(2);
+        lock.acquireMultipleLocks(testMultipleKeys, 2, 60, function(err, lockIdMapping) {
+          if (err) { return done(err); }
+          afterDone = _.after(testMultipleKeys.length, done);
+          _.each(lockIdMapping, function(lockId, lockKey) {
+            client.multi()
+            .get(lockId)
+            .ttl(lockId)
+            .smembers(lockKey)
+            .exec(function(err, replies) {
+              if (err) { return done(err); }
+              replies[0].should.equal(lockKey);
+              replies[1].should.be.approximately(60, 5);
+              replies[2].should.have.length(2);
+              replies[2].should.containEql(lockId);
+              return afterDone(null);
+            });
+          });
+        });
+      });
+    });
+
+    it("on existing keys with insufficient availability and fails", function(done) {
+      lock.acquireMultipleLocks(testMultipleKeys, 1, 60, function(err, lockIdMapping) {
+        if (err) { return done(err); }
+        lockIdMapping.should.be.ok;
+        _.keys(lockIdMapping).length.should.equal(2);
+        lock.acquireMultipleLocks(testMultipleKeys, 1, 60, function(err, secondLockIdMapping) {
+          if (err) { return done(err); }
+          (secondLockIdMapping === null).should.be.true;
+          afterDone = _.after(testMultipleKeys.length, done);
+          _.each(lockIdMapping, function(lockId, lockKey) {
+            client.multi()
+              .get(lockId)
+              .ttl(lockId)
+              .smembers(lockKey)
+              .exec(function(err, replies) {
+                if (err) { return done(err); }
+                replies[0].should.equal(lockKey);
+                replies[1].should.be.approximately(60, 5);
+                replies[2].should.have.length(1);
+                replies[2].should.containEql(lockId);
+                return afterDone(null);
+              });
+          });
+        });
+      });
     });
 
   });
