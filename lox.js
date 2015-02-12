@@ -55,18 +55,45 @@ app.post('/lock', function(req, res) {
     },
     function(callback) {
       lock.acquireLock(req.body.key, req.body.maximumLocks, req.body.ttlSeconds, function(err, lockId) {
-        if (err) {
-          return callback(err);
-        }
-        if (lockId) {
-          return res.status(201).json({lockId: lockId});
-        }
+        if (err) { return callback(err); }
+        if (lockId) { return res.status(201).json({lockId: lockId}); }
         return res.send(204);
       });
     }
   ], function(err) {
       if (err) { return res.send(500); }
   });
+});
+
+/**
+ * POST /locks
+ * Attempt to acquire multiple shared locks. Acquiring *all* of the locks will fail if maxiumLocks or more
+ * are already being held by other clients on *any* of the keys. Returns 201 with a JSON object with a map
+ * of the keys to each acquired lockId if the locks were successfully acquired, otherwise 204.
+ * @param {[string]} keys the identifiers of the shared locks to acquire
+ * @param {integer} maximumLocks the maximum number of locks (per key) that can be held after a successful lock acquisition
+ * @param {number} ttlSeconds the number of seconds for which to hold each lock
+ */
+app.post('/locks', function(req, res) {
+
+  if (req.body.keys === undefined || req.body.maximumLocks === undefined || req.body.ttlSeconds === undefined) {
+    return res.send(400);
+  }
+
+  async.series([
+    function(callback) {
+      async.each(req.body.keys, function(key, cb) { lock.reapLock(key, cb); }, callback);
+    },
+    function(callback) {
+      lock.acquireMultipleLocks(req.body.keys, req.body.maximumLocks, req.body.ttlSeconds, function(err, lockIdMapping) {
+        if (err) { return callback(err); }
+        if (lockIdMapping) { return res.status(201).json({lockIds: lockIdMapping}); }
+        return res.send(204);
+      });
+    }], function(err) {
+      if (err) { return res.send(500); }
+    });
+
 });
 
 /**

@@ -1,5 +1,6 @@
-### 0.0.3 (Unreleased)
+### 0.0.3 (February 12, 2015)
 
+  * Added endpoint `POST /locks` which allows for all-or-nothing acquisition of multiple locks subject to the same `maximumLocks` and `ttlSeconds` constraints. See the API documentation for full details.
   * Lox now attempts to cache its Lua scripts inside of Redis. This eliminates the need to send the entire script to Redis for each evaluation; now Lox need only send the SHA hash of the script each time.
 
 ### 0.0.2 (February 11, 2015)
