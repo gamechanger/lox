@@ -4,7 +4,7 @@ var _ = require('underscore');
 var uuid = require('node-uuid');
 var async = require('async');
 var lock = require('../../lib/lock');
-var client = require('../../lib/redis-client');
+var client = require('../../lib/redis-client').client;
 
 describe("The locking module", function() {
   var testKey = null;
