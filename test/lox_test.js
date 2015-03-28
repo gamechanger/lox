@@ -25,6 +25,36 @@ describe("The HTTP endpoint", function() {
     });
   });
 
+  describe("GET /lock", function() {
+
+    it("returns 400 without all required parameters", function(done) {
+      request(app).get('/lock').expect(400, done);
+    });
+
+    it("returns 200 and a count against an empty lock", function(done) {
+      request(app).get('/lock').send({key: testKey})
+        .expect(200)
+        .expect(function(res) {
+          res.body.should.be.eql({heldLocks: 0});
+        })
+        .end(done);
+    });
+
+    it("returns 200 and a count against a non-empty lock", function(done) {
+      var form = {key: testKey, maximumLocks: 1, ttlSeconds: 60};
+      request(app).post('/lock').send(form).end(function(err, res) {
+        if (err) { done(err); }
+        request(app).get('/lock').send({key: testKey})
+          .expect(200)
+          .expect(function(res) {
+            res.body.should.be.eql({heldLocks: 1});
+          })
+          .end(done);
+      });
+    });
+
+  });
+
   describe("POST /lock", function() {
 
     it("returns 400 without all required parameters", function(done) {
