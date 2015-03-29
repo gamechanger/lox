@@ -17,6 +17,22 @@ documentation:
         description: The Lox service is available and serving requests
 /lock:
   description: Endpoints to acquire and release a single distributed lock
+  get:
+    description: Retrieve current information on a shared lock.
+    queryParameters:
+      key:
+        displayName: key
+        type: string
+        description: An identifier for the shared lock you want to acquire
+        example: lox.shared.lock.123
+        required: true
+    responses:
+      200:
+        description: Information on the shared lock
+        body:
+          application/json:
+            example: |
+              {"heldLocks": 5}
   post:
     description: Attempt to acquire a shared lock.
     queryParameters:

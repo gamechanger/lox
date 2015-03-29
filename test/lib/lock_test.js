@@ -90,6 +90,43 @@ describe("The locking module", function() {
 
   });
 
+  describe("counts currently held locks", function() {
+
+    it("when there are no held locks", function(done) {
+      lock.countLocks(testKey, function(err, count) {
+        if (err) { return done(err); }
+        count.should.equal(0);
+        done(err);
+      });
+    });
+
+    it("when there is one held lock", function(done) {
+      lock.acquireLock(testKey, 5, 60, function(err, lockId) {
+        if (err) { return done(err); }
+        lock.countLocks(testKey, function(err, count) {
+          if (err) { return done(err); }
+          count.should.equal(1);
+          done(err);
+        });
+      });
+    });
+
+    it("when there are multiple held locks", function(done) {
+      lock.acquireLock(testKey, 5, 60, function(err, lockId) {
+        if (err) { return done(err); }
+        lock.acquireLock(testKey, 5, 60, function(err, lockId) {
+          if (err) { return done(err); }
+          lock.countLocks(testKey, function(err, count) {
+            if (err) { return done(err); }
+            count.should.equal(2);
+            done(err);
+          });
+        });
+      });
+    });
+
+  });
+
   describe("acquires multiple locks", function() {
 
     it("on two non-existent keys", function(done) {

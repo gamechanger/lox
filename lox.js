@@ -35,6 +35,36 @@ app.get('/health', function(req, res) {
 });
 
 /**
+ * GET /lock
+ * Returns the number of locks currently held on the provided key.
+ * You generally don't want to perform any client-side logic on this as then
+ * count may be stale by the time it gets to your client. Should only be used
+ * for monitoring, introspection, that sort of thing.
+ * @param {string} key the identifier of the shared lock for which to get a count
+ */
+app.get('/lock', function(req, res) {
+
+  if (_.isUndefined(req.body.key)) {
+    return res.send(400);
+  }
+
+  async.series([
+    function(callback) {
+      lock.reapLock(req.body.key, callback);
+    },
+    function(callback) {
+      lock.countLocks(req.body.key, function(err, count) {
+        if (err) { return callback(err); }
+        return res.status(200).json({heldLocks: count});
+      });
+    }
+  ], function(err) {
+    if (err) { return res.send(500); }
+  });
+
+});
+
+/**
  * POST /lock
  * Attempt to acquire a shared lock. Acquiring the lock will fail if maxiumLocks or more
  * are already being held by other clients. Returns 201 with a JSON object with the acquired
