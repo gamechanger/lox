@@ -48,9 +48,18 @@ app.get('/lock', function(req, res) {
     return res.send(400);
   }
 
-  lock.countLocks(req.body.key, function(err, count) {
+  async.series([
+    function(callback) {
+      lock.reapLock(req.body.key, callback);
+    },
+    function(callback) {
+      lock.countLocks(req.body.key, function(err, count) {
+        if (err) { return callback(err); }
+        return res.status(200).json({heldLocks: count});
+      });
+    }
+  ], function(err) {
     if (err) { return res.send(500); }
-    return res.status(200).json({heldLocks: count});
   });
 
 });
