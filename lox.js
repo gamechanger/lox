@@ -44,16 +44,16 @@ app.get('/health', function(req, res) {
  */
 app.get('/lock', function(req, res) {
 
-  if (_.isUndefined(req.body.key)) {
+  if (_.isUndefined(req.query.key)) {
     return res.send(400);
   }
 
   async.series([
     function(callback) {
-      lock.reapLock(req.body.key, callback);
+      lock.reapLock(req.query.key, callback);
     },
     function(callback) {
-      lock.countLocks(req.body.key, function(err, count) {
+      lock.countLocks(req.query.key, function(err, count) {
         if (err) { return callback(err); }
         return res.status(200).json({heldLocks: count});
       });
