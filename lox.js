@@ -45,7 +45,7 @@ app.get('/health', function(req, res) {
 app.get('/lock', function(req, res) {
 
   if (_.isUndefined(req.query.key)) {
-    return res.send(400);
+    return res.sendStatus(400);
   }
 
   async.series([
@@ -76,7 +76,7 @@ app.get('/lock', function(req, res) {
 app.post('/lock', function(req, res) {
 
   if ([req.body.key, req.body.maximumLocks, req.body.ttlSeconds].some(_.isUndefined)) {
-    return res.send(400);
+    return res.sendStatus(400);
   }
 
   async.series([
@@ -87,7 +87,7 @@ app.post('/lock', function(req, res) {
       lock.acquireLock(req.body.key, req.body.maximumLocks, req.body.ttlSeconds, function(err, lockId) {
         if (err) { return callback(err); }
         if (lockId) { return res.status(201).json({lockId: lockId}); }
-        return res.send(204);
+        return res.sendStatus(204);
       });
     }
   ], function(err) {
@@ -107,7 +107,7 @@ app.post('/lock', function(req, res) {
 app.post('/locks', function(req, res) {
 
   if ([req.body.keys, req.body.maximumLocks, req.body.ttlSeconds].some(_.isUndefined)) {
-    return res.send(400);
+    return res.sendStatus(400);
   }
 
   async.series([
@@ -118,7 +118,7 @@ app.post('/locks', function(req, res) {
       lock.acquireMultipleLocks(req.body.keys, req.body.maximumLocks, req.body.ttlSeconds, function(err, lockIdMapping) {
         if (err) { return callback(err); }
         if (lockIdMapping) { return res.status(201).json({lockIds: lockIdMapping}); }
-        return res.send(204);
+        return res.sendStatus(204);
       });
     }], function(err) {
       if (err) { return res.send(500); }
@@ -138,7 +138,7 @@ app.delete('/lock/:lockId', function(req, res) {
     if (err) {
       return res.send(500);
     }
-    return res.send(204);
+    return res.sendStatus(204);
   });
 });
 
