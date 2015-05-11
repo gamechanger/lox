@@ -90,3 +90,4 @@ It then receives:
 To run tests locally, make sure you've pointed Lox to a Redis that isn't part of your production stack, then run `npm test`. If you want to run a local Redis for testing, [Docker](http://docker.io) is great for that.
 
 Issues and pull requests are warmly received in the spirit of friendship.
+do
