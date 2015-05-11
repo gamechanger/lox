@@ -9,7 +9,6 @@ script:
   - cd $REPO
   - npm install
   - npm test
-  - tests_complete lox
 notify:
   webhook:
     urls:
