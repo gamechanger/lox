@@ -1,8 +1,6 @@
 image: docker.gamechanger.io/test/lox
 git:
   depth: 10
-env:
-  - REPO=/var/cache/drone/src/github.com/gamechanger/lox
 services:
   - redis
 script:
