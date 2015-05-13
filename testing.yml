@@ -1,15 +1,7 @@
 image: docker.gamechanger.io/test/lox
-git:
-  depth: 10
 services:
   - redis
 script:
   - cd $REPO
   - npm install
   - npm test
-notify:
-  webhook:
-    urls:
-      - http://localhost:7777/webhook
-    on_success: true
-    on_failure: true
