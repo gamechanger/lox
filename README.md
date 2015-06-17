@@ -1,6 +1,7 @@
 ## Lox: A simple distributed lock manager
 
 [![Build Status](https://travis-ci.org/gamechanger/lox.svg?branch=master)](https://travis-ci.org/gamechanger/lox)
+[![Github License](https://img.shields.io/github/license/gamechanger/lox.svg)](https://github.com/gamechanger/lox/blob/master/LICENSE)
 
 ### Installation
 
