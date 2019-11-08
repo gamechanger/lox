@@ -1,0 +1,32 @@
+stages:
+  - tests
+  - release
+  - publish
+
+tests:
+  stage: tests
+  image: docker.gamechanger.io/test/lox
+  script:
+    - npm install
+    - npm test
+  only:
+    refs:
+      - branches
+
+create tag:
+  stage: release
+  image: docker.gamechanger.io/bumpversion-git-tag
+  script:
+    - bumpversion --version=major
+  only:
+    refs:
+      - master
+
+build docker image:
+  stage: publish
+  image: docker.gamechanger.io/docker-build-image
+  script:
+    - docker-build --image-name=lox
+  only:
+    refs:
+      - master
