@@ -1,0 +1,37 @@
+version: '3.7'
+networks:
+  tests:
+    name: tests
+services:
+  redis:
+    hostname: redis
+    image: bradrydzewski/redis:2.8
+    networks:
+    - tests
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    init: true
+    depends_on:
+    - redis
+    environment:
+      GIT_BRANCH: ${CI_COMMIT_REF_NAME:-master}
+    command: |-
+      sh -c '
+        set -ex
+        sleep 7.5
+        apt-get install socat -y
+        socat TCP-LISTEN:6379,fork TCP4:redis:6379 &
+        echo "Starting tests (inside docker container)"
+        export REPO=/mnt/test
+        export XUNIT_DIR=$$REPO/.xunit
+        mkdir -p $$XUNIT_DIR
+        chmod 777 $$XUNIT_DIR
+        cd $$REPO
+        npm install
+        npm test
+      '
+    networks:
+    - tests
+    working_dir: /mnt/test

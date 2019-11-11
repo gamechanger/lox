@@ -5,10 +5,10 @@ stages:
 
 tests:
   stage: tests
-  image: docker.gamechanger.io/test/lox
+  image: docker.gamechanger.io/docker-compose-cleanup:latest
   script:
-    - npm install
-    - npm test
+    - docker-compose build --pull tests
+    - docker-compose run --rm tests
   only:
     refs:
       - branches
